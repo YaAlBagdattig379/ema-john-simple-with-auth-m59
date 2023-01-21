@@ -1,44 +1,28 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Routes,Route } from 'react-router-dom';
 import './App.css';
 import About from './components/About/About';
-import Main from './layouts/Main';
+//import Main from './layouts/Main';
 import Shop from './components/Shop/Shop';
 import Orders from './components/Orders/Orders';
 import Inventory from './components/Inventory/Inventory';
-import { productsAndCartLoader } from './loaders/productsAndCartLoader';
+import Header from './components/Header/Header';
+import Login from '../src/components/Login/Login';
+import SignUp from '../src/components/Signup/Signup';
 
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path:'/',
-      element: <Main></Main>,
-      children: [
-        {
-          path: '/',
-          loader: () => fetch('products.json'),
-          element: <Shop></Shop>
-        },
-        {
-          path:'orders',
-          loader: productsAndCartLoader,
-          element: <Orders></Orders>
-        },
-        {
-          path: 'inventory',
-          element: <Inventory></Inventory>
-        },
-        {
-          path:'about',
-          element:<About></About>
-        }
-      ]
-    },
-    
-  ])
   return (
     <div>
-      <RouterProvider router={router}></RouterProvider>
+      <Header></Header>
+      <Routes>
+        <Route path='/' element={<Shop></Shop>}></Route>
+        <Route path='/shop' element={<Shop></Shop>}></Route>
+        <Route path='/orders' element={<Orders></Orders>}></Route>
+        <Route path='/inventory' element={<Inventory></Inventory>}></Route>
+        <Route path='/about' element={<About></About>}></Route>
+        <Route path='/login' element={<Login></Login>}></Route>
+        <Route path='/signup' element={<SignUp></SignUp>}></Route>
+      </Routes>
     </div>
   );
 }
