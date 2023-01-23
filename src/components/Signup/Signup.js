@@ -1,54 +1,51 @@
-//import React, { useState } from 'react';
-//import {Link, useNavigate} from 'react-router-dom';
-//import img from '../../images/google.png';
-//import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-//import './Signup.css';
-//import auth from '../../firebase.init';
+import React,{ useState } from 'react';
+import {Link, useNavigate} from 'react-router-dom';
+import img from '../../images/google.png';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';import './Signup.css';
+import auth from '../../firebase.init';
 
 const Signup = () => {
 
-    // const [email,setEmail] = useState('');
-    // const [password,setPassword] = useState('');
-    // const [conFirmPassword,setConFirmPassword] = useState('');
-    // const [error,setError] = useState('');
-    // const navigate = useNavigate();
+   const [email,setEmail] = useState('');
+   const [password,setPassword] = useState('');
+   const [conFirmPassword,setConFirmPassword] = useState('');
+   const [error,setError] = useState('');
 
-    // const [createUserWithEmailAndPassword ,
-    //     user] = useCreateUserWithEmailAndPassword(auth);
-    // const handleEmailBlur = (event) =>{
-    //     setEmail(event.target.value)
-    //     console.log('email blur')
-    // }
-    // const handlePasswordBlur = (event) =>{
-    //     setPassword(event.target.value)
-    //     console.log('password blur')
-    // }
-    // const handleConfirmPasswordBlur = (event) =>{
-    //     setConFirmPassword(event.target.value)
-    //     console.log('confirm password blur')
-    // }
-    
-    // if(user){
-    //     navigate('/about')
-    // }
-    // const handleCreateUser = (event) =>{
-    //     event.preventDefault(); 
-    //     if(password !== conFirmPassword){
-    //         setError('your two passwords did not match !')
-    //         return;
-    //     }
-    //     if(password.length < 6){
-    //         setError('password must be Six characters or longer !')
-    //         return;
-    //     }
+   const navigate = useNavigate();
+
+   const [user,createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth) ;
+   const handleEmailBlur = (event) =>{
+        setEmail(event.target.value)
+        console.log('email blur')
+    }
+   const handlePasswordBlur = (event) =>{
+         setPassword(event.target.value)
+         console.log('password blur')
+   }
+   const handleConfirmPasswordBlur = (event) =>{
+        setConFirmPassword(event.target.value)
+        console.log('confirm password blur')
+   }
+   if(user){
+      navigate('/')
+   }
+   const handleCreateUser = (event) =>{
+         event.preventDefault(); 
+         if(password !== conFirmPassword){
+           setError('your two passwords did not match !')
+            return;
+         }
+        if(password.length < 6){
+            setError('password must be Six characters or longer !')
+            return;
+         }
     //     console.log(email,password)
-    //     createUserWithEmailAndPassword(email,password);
-    // }
+        createUserWithEmailAndPassword(email,password);
+   }
     return (
         <div className='form-container'>
-            <h1>this is signup</h1>
-            {/* <div>
-              <h2 className='form-title'>Signup</h2>  
+            <div>
+              <h2 className='form-title'>Sign Up</h2>  
               <form onSubmit={handleCreateUser}>
                  <div className='input-group'>
                     <label htmlFor="email">Email</label>
@@ -86,7 +83,7 @@ const Signup = () => {
                      </a>
                  </div>
                 
-            </div> */}
+            </div>
         </div>
     );
 };
