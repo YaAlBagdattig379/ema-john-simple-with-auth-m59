@@ -1,7 +1,8 @@
-import React,{ useState } from 'react';
+import React,{ useEffect, useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import img from '../../images/google.png';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';import './Signup.css';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import './Signup.css';
 import auth from '../../firebase.init';
 
 const Signup = () => {
@@ -13,7 +14,7 @@ const Signup = () => {
 
    const navigate = useNavigate();
 
-   const [user,createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth) ;
+   const [createUserWithEmailAndPassword,user] = useCreateUserWithEmailAndPassword(auth) ;
    const handleEmailBlur = (event) =>{
         setEmail(event.target.value)
         console.log('email blur')
@@ -26,9 +27,11 @@ const Signup = () => {
         setConFirmPassword(event.target.value)
         console.log('confirm password blur')
    }
-   if(user){
-      navigate('/')
-   }
+   useEffect(() => {
+      if (user) {
+        navigate('/');
+      }
+  },[user])
    const handleCreateUser = (event) =>{
          event.preventDefault(); 
          if(password !== conFirmPassword){
