@@ -1,6 +1,6 @@
 import './Login.css'
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 // import {useLocation} from 'react-router-dom'; 
 import auth from '../../firebase.init';
 import img from '../../images/google.png'
@@ -15,7 +15,8 @@ const Login = () => {
       loading,
       error,
     ] = useSignInWithEmailAndPassword(auth);
-  
+   const location = useLocation();
+   const from = location.state?.from?.pathname || '/' ;  
    const handleEmailBlur = event =>{
        setEmail(event.target.value);
    }
@@ -23,11 +24,12 @@ const Login = () => {
        setPassword(event.target.value);
    } 
    // advanced modified
-   useEffect(()=>{
-      if(user){
-         navigate('/')
+   useEffect(() => {
+      if (user) {
+         navigate(from,{replace: true});
       }
-   })
+  },[user])
+
    const handleUserSignIn = event =>{
       event.preventDefault();
       signInWithEmailAndPassword(email,password);
@@ -56,8 +58,8 @@ const Login = () => {
 //    if(user){
 //       navigate(from, {replace : true});
 //    }
-return (
-   <div className='form-container'>
+   return (
+      <div className='form-container'>
          <div>
                <h2 className='form-title'>Login</h2>  
                <div>
@@ -102,7 +104,7 @@ return (
                </div>
              </div>
        </div>
-);
-}
+   );
+};
 
 export default Login;

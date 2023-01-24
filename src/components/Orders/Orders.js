@@ -17,7 +17,6 @@ const Orders = () => {
         removeFromDb(product.id);
     }
 
-    
     return (
         <div className='shop-container'>
             <div className="review-items-container">
@@ -31,7 +30,8 @@ const Orders = () => {
             </div>
             <div className="cart-container">
                 <Cart cart={cart}>
-                        <button onClick={()=>navigate('/shipment')}>Proceed Shipping </button>
+                        <br />
+                        <button onClick={()=>navigate('/login')}>Proceed CheckOut </button>
                 </Cart>
             </div>
         </div>
