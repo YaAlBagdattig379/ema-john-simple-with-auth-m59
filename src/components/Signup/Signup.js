@@ -27,9 +27,10 @@ const Signup = () => {
         setConFirmPassword(event.target.value)
         console.log('confirm password blur')
    }
+   // modified useEffect
    useEffect(() => {
       if (user) {
-        navigate('/');
+        navigate('/home');
       }
   },[user])
    const handleCreateUser = (event) =>{
