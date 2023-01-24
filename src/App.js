@@ -24,6 +24,21 @@ function App() {
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
       </Routes>
+      {/* /** 
+       <Routes>
+        <Route index element={<Landing />} />
+        <Route path="landing" element={<Landing />} />
+        <Route
+          path="home"
+          element={
+            <ProtectedRoute user={user}>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        ...
+      </Routes>
+      */}
     </div>
   );
 }
