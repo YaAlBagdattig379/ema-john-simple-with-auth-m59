@@ -1,19 +1,24 @@
 import React,{ useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 
 const Shipment = () => {
+   const [user] = useAuthState(auth);
    const [name,setName] = useState('');
    const [email,setEmail] = useState('');
    const [address,setAddress] = useState('');
-   const [Phone,setPhone] = useState('');
+   const [phone,setPhone] = useState('');
    const [error,setError] = useState('');
 // const navigate = useNavigate();
     const handleNameBlur = (event) =>{
         setName(event.target.value)
         console.log('email blur')
     }
-    const handleEmailBlur = (event) =>{
-        setEmail(event.target.value);
+    /**
+     const handleEmailBlur = (event) =>{
+         setEmail(event.target.value);
     }
+    */
     const handleAddressBlur = (event) =>{
          setAddress(event.target.value)
          console.log('password blur')
@@ -23,7 +28,9 @@ const Shipment = () => {
         console.log('confirm password blur')
     }
     const handleCreateUser = (event) =>{
-    event.preventDefault(); 
+        event.preventDefault();
+        const shipping = {name,email,address,phone} ;
+        console.log(shipping) ;
     }
     return (
         <div className='form-container'>
@@ -36,15 +43,15 @@ const Shipment = () => {
              </div>
              <div className='input-group'>
                 <label htmlFor="email">Your Email</label>
-                <input onBlur={handleEmailBlur}  placeholder='type email' type="email" required name="email" id="" />
+                <input  value={user?.email} readOnly type="email" required name="email" id="" />
              </div>
              <div className='input-group'>
                 <label htmlFor="password">Your Address</label>
                 <input onBlur={handleAddressBlur}  type="text" required name="Address" id="" />
              </div>
              <div className='input-group'>
-                <label htmlFor="confirm-password">Phone Number</label>
-                <input onBlur={handlePhoneNumberBlur} type="number" required name="Phone" id="" />
+                <label htmlFor="phone">Phone Number</label>
+                <input onBlur={handlePhoneNumberBlur} type="text" required name="Phone" id="" />
              </div>
               <p style={{color:'red'}}>{error}</p>
              <input className='form-submit' type="submit" value="Add Shipping" />
