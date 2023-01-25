@@ -35,29 +35,6 @@ const Login = () => {
       signInWithEmailAndPassword(email,password);
       console.log('ehllo from handle userSignIn !')
    }
-//    const [
-//       signInWithEmailAndPassword,
-//       user,
-//       loading,
-//       error,
-//     ] = useSignInWithEmailAndPassword(auth);
-//    const navigate = useNavigate();
-//    const location = useLocation();
-//    const from = location.state?.from?.pathname || '/';
-//    const handleEmailBlur = (event) =>{
-//        setEmail(event.target.value);
-//    }
-//    const handlePasswordBlur = (event) =>{
-//        setPassword(event.target.value);
-//    }
-//    const handleUserSignIn = (event) =>{
-//       // event.eventDefault();
-//       event.preventDefault(); 
-//       signInWithEmailAndPassword(email,password);
-//    } 
-//    if(user){
-//       navigate(from, {replace : true});
-//    }
    return (
       <div className='form-container'>
          <div>
